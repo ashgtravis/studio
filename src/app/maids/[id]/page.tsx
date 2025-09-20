@@ -18,9 +18,9 @@ export default function MaidDetailPage({ params }: { params: { id: string } }) {
   const getImageHint = (id: string) => {
     switch (id) {
         case '1': return 'woman cooking';
-        case '2': return 'bathroom cleaning';
-        case '3': return 'floor sweeping';
-        default: return 'indian woman portrait';
+        case '2': return 'woman cleaning';
+        case '3': return 'woman sweeping';
+        default: return 'indian woman';
     }
   }
 

@@ -8,7 +8,7 @@ const maids: Maid[] = [
     monthly_rate: 3800,
     rating: 4.8,
     verified: true,
-    image_url: 'https://picsum.photos/seed/indian-cook/300/300',
+    image_url: 'https://picsum.photos/seed/woman-cooking/300/300',
     description: 'A fantastic cook, Reshmi specializes in preparing delicious and healthy home-style meals. She is an expert in various cuisines and maintains a spotless kitchen.'
   },
   {
@@ -18,7 +18,7 @@ const maids: Maid[] = [
     monthly_rate: 3200,
     rating: 4.6,
     verified: true,
-    image_url: 'https://picsum.photos/seed/bathroom-cleaning/300/300',
+    image_url: 'https://picsum.photos/seed/woman-cleaning/300/300',
     description: 'Maria is a deep cleaning specialist who prides herself on leaving every corner of your home, especially bathrooms, sparkling clean. She is efficient and reliable.'
   },
   {
@@ -28,7 +28,7 @@ const maids: Maid[] = [
     monthly_rate: 2800,
     rating: 4.5,
     verified: true,
-    image_url: 'https://picsum.photos/seed/floor-sweeping/300/300',
+    image_url: 'https://picsum.photos/seed/woman-sweeping/300/300',
     description: 'Shruti is diligent and efficient, ensuring your floors are always pristine. She handles daily sweeping, mopping, and other general cleaning tasks with great care.'
   },
   {
