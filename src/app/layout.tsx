@@ -16,6 +16,7 @@ const ptSans = PT_Sans({
 export const metadata: Metadata = {
   title: "MaidLink - Your Trusted Home Help Partner",
   description: "Find and book verified maids for your home needs.",
+  manifest: "/manifest.webmanifest",
 };
 
 export default function RootLayout({
