@@ -27,7 +27,7 @@ export default function MaidDetailPage({ params }: { params: { id: string } }) {
                 width={300}
                 height={300}
                 className="w-full aspect-square rounded-lg object-cover shadow-lg"
-                data-ai-hint="indian woman"
+                data-ai-hint="indian woman portrait"
               />
             </div>
             <div className="md:w-2/3">

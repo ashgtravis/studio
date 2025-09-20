@@ -36,12 +36,12 @@ export default function Home() {
                 </div>
               </div>
               <Image
-                src="https://picsum.photos/seed/hero/600/600"
+                src="https://picsum.photos/seed/home-cleaning/600/600"
                 alt="Hero"
                 width={600}
                 height={600}
                 className="mx-auto aspect-square overflow-hidden rounded-xl object-cover sm:w-full lg:order-last"
-                data-ai-hint="woman cleaning"
+                data-ai-hint="kitchen cleaning"
               />
             </div>
           </div>

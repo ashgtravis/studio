@@ -21,7 +21,7 @@ export function MaidCard({ maid }: MaidCardProps) {
           width={400}
           height={400}
           className="aspect-square w-full rounded-t-lg object-cover"
-          data-ai-hint="indian woman"
+          data-ai-hint="indian woman portrait"
         />
       </CardHeader>
       <CardContent className="flex-grow p-4">
