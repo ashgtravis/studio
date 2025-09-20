@@ -1,3 +1,46 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "maid-1",
+      "description": "Profile picture of Sita",
+      "imageUrl": "https://picsum.photos/seed/1/300/300",
+      "imageHint": "smiling woman portrait"
+    },
+    {
+      "id": "maid-2",
+      "description": "Profile picture of Radha",
+      "imageUrl": "https://picsum.photos/seed/2/300/300",
+      "imageHint": "professional woman"
+    },
+    {
+      "id": "maid-3",
+      "description": "Profile picture of Lakshmi",
+      "imageUrl": "https://picsum.photos/seed/3/300/300",
+      "imageHint": "friendly woman"
+    },
+    {
+      "id": "maid-4",
+      "description": "Profile picture of Gita",
+      "imageUrl": "https://picsum.photos/seed/4/300/300",
+      "imageHint": "woman portrait"
+    },
+    {
+      "id": "maid-5",
+      "description": "Profile picture of Meena",
+      "imageUrl": "https://picsum.photos/seed/5/300/300",
+      "imageHint": "caring woman"
+    },
+    {
+      "id": "maid-6",
+      "description": "Profile picture of Priya",
+      "imageUrl": "https://picsum.photos/seed/6/300/300",
+      "imageHint": "energetic woman"
+    },
+    {
+      "id": "hero-image",
+      "description": "Hero image for the landing page",
+      "imageUrl": "https://picsum.photos/seed/hero/600/600",
+      "imageHint": "happy family clean home"
+    }
+  ]
 }
