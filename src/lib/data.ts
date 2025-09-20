@@ -4,32 +4,32 @@ const maids: Maid[] = [
   {
     id: '1',
     name: 'Reshmi',
-    services: ['cleaning', 'cooking', 'washing utensils', 'sweeping', 'mopping'],
-    monthly_rate: 3000,
-    rating: 4.7,
+    services: ['cooking', 'meal prep', 'kitchen cleaning'],
+    monthly_rate: 3800,
+    rating: 4.8,
     verified: true,
-    image_url: 'https://picsum.photos/seed/indian-woman-1/300/300',
-    description: 'Experienced and diligent, Reshmi has been providing top-notch cleaning and cooking services for over 5 years. She is known for her attention to detail and delicious home-style meals.'
+    image_url: 'https://picsum.photos/seed/indian-cook/300/300',
+    description: 'A fantastic cook, Reshmi specializes in preparing delicious and healthy home-style meals. She is an expert in various cuisines and maintains a spotless kitchen.'
   },
   {
     id: '2',
     name: 'Maria',
-    services: ['cleaning', 'washing utensils', 'sweeping', 'mopping'],
-    monthly_rate: 2500,
-    rating: 4.4,
+    services: ['deep cleaning', 'washing bathrooms', 'sweeping', 'mopping'],
+    monthly_rate: 3200,
+    rating: 4.6,
     verified: true,
-    image_url: 'https://picsum.photos/seed/indian-woman-2/300/300',
-    description: 'Maria is a cleaning specialist who prides herself on leaving every home spotless. She is efficient, reliable, and has a friendly demeanor that clients appreciate.'
+    image_url: 'https://picsum.photos/seed/bathroom-cleaning/300/300',
+    description: 'Maria is a deep cleaning specialist who prides herself on leaving every corner of your home, especially bathrooms, sparkling clean. She is efficient and reliable.'
   },
   {
     id: '3',
     name: 'Shruti',
-    services: ['cooking', 'babysitting'],
-    monthly_rate: 4000,
-    rating: 4.8,
+    services: ['sweeping', 'mopping', 'washing utensils', 'dusting'],
+    monthly_rate: 2800,
+    rating: 4.5,
     verified: true,
-    image_url: 'https://picsum.photos/seed/indian-woman-3/300/300',
-    description: 'With a background in culinary arts, Shruti is perfect for families. She can prepare nutritious meals and is great with kids.'
+    image_url: 'https://picsum.photos/seed/floor-sweeping/300/300',
+    description: 'Shruti is diligent and efficient, ensuring your floors are always pristine. She handles daily sweeping, mopping, and other general cleaning tasks with great care.'
   },
   {
     id: '4',

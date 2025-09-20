@@ -12,6 +12,14 @@ type MaidCardProps = {
 };
 
 export function MaidCard({ maid }: MaidCardProps) {
+    const getImageHint = (id: string) => {
+    switch (id) {
+        case '1': return 'woman cooking';
+        case '2': return 'bathroom cleaning';
+        case '3': return 'floor sweeping';
+        default: return 'indian woman portrait';
+    }
+  }
   return (
     <Card className="flex flex-col">
       <CardHeader className="p-0">
@@ -21,7 +29,7 @@ export function MaidCard({ maid }: MaidCardProps) {
           width={400}
           height={400}
           className="aspect-square w-full rounded-t-lg object-cover"
-          data-ai-hint="indian woman portrait"
+          data-ai-hint={getImageHint(maid.id)}
         />
       </CardHeader>
       <CardContent className="flex-grow p-4">

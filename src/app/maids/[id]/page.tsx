@@ -14,6 +14,15 @@ export default function MaidDetailPage({ params }: { params: { id: string } }) {
   if (!maid) {
     notFound();
   }
+  
+  const getImageHint = (id: string) => {
+    switch (id) {
+        case '1': return 'woman cooking';
+        case '2': return 'bathroom cleaning';
+        case '3': return 'floor sweeping';
+        default: return 'indian woman portrait';
+    }
+  }
 
   return (
     <div className="container mx-auto max-w-6xl px-4 py-8 md:py-12">
@@ -27,7 +36,7 @@ export default function MaidDetailPage({ params }: { params: { id: string } }) {
                 width={300}
                 height={300}
                 className="w-full aspect-square rounded-lg object-cover shadow-lg"
-                data-ai-hint="indian woman portrait"
+                data-ai-hint={getImageHint(maid.id)}
               />
             </div>
             <div className="md:w-2/3">
