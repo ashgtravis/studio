@@ -37,11 +37,11 @@ const prompt = ai.definePrompt({
   name: 'estimateMonthlyPricePrompt',
   input: {schema: EstimateMonthlyPriceInputSchema},
   output: {schema: EstimateMonthlyPriceOutputSchema},
-  prompt: `You are an AI assistant for a maid booking service. Your task is to calculate an estimated monthly price for a client's request.
+  prompt: `You are an AI assistant for a maid booking service. Your task is to calculate an estimated monthly price for a client's request in Indian Rupees (₹).
 
 You need to act like a fair calculator. The final price should be influenced by the maid's base rate, the size of the home, and the number/type of services requested.
 
-Maid's Base Rate: \${{{maidBaseRate}}} per month. This is a starting point.
+Maid's Base Rate: ₹{{{maidBaseRate}}} per month. This is a starting point.
 Client's Home: {{{homeBhk}}}, {{{homeSqFt}}} sq ft.
 Requested Services:
 {{#each services}}
