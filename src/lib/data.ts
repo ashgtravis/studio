@@ -8,7 +8,7 @@ const maids: Maid[] = [
     monthly_rate: 3000,
     rating: 4.7,
     verified: true,
-    image_url: 'https://picsum.photos/seed/1/300/300',
+    image_url: 'https://picsum.photos/seed/maid1/300/300',
     description: 'Experienced and diligent, Sita has been providing top-notch cleaning and cooking services for over 5 years. She is known for her attention to detail and delicious home-style meals.'
   },
   {
@@ -18,7 +18,7 @@ const maids: Maid[] = [
     monthly_rate: 2500,
     rating: 4.4,
     verified: true,
-    image_url: 'https://picsum.photos/seed/2/300/300',
+    image_url: 'https://picsum.photos/seed/maid2/300/300',
     description: 'Radha is a cleaning specialist who prides herself on leaving every home spotless. She is efficient, reliable, and has a friendly demeanor that clients appreciate.'
   },
   {
@@ -28,7 +28,7 @@ const maids: Maid[] = [
     monthly_rate: 4000,
     rating: 4.8,
     verified: true,
-    image_url: 'https://picsum.photos/seed/3/300/300',
+    image_url: 'https://picsum.photos/seed/maid3/300/300',
     description: 'With a background in culinary arts, Lakshmi is perfect for families. She can prepare nutritious meals and is great with kids.'
   },
   {
@@ -38,7 +38,7 @@ const maids: Maid[] = [
     monthly_rate: 2800,
     rating: 4.6,
     verified: true,
-    image_url: 'https://picsum.photos/seed/4/300/300',
+    image_url: 'https://picsum.photos/seed/maid4/300/300',
     description: 'Gita is hardworking and meticulous. She excels at general house cleaning and laundry services, ensuring your clothes are fresh and your home is tidy.'
   },
   {
@@ -48,7 +48,7 @@ const maids: Maid[] = [
     monthly_rate: 3500,
     rating: 4.9,
     verified: true,
-    image_url: 'https://picsum.photos/seed/5/300/300',
+    image_url: 'https://picsum.photos/seed/maid5/300/300',
     description: 'Meena is a compassionate caregiver with experience in assisting the elderly. She combines this with her cooking skills to provide holistic support.'
   },
   {
@@ -58,7 +58,7 @@ const maids: Maid[] = [
     monthly_rate: 4500,
     rating: 4.7,
     verified: false,
-    image_url: 'https://picsum.photos/seed/6/300/300',
+    image_url: 'https://picsum.photos/seed/maid6/300/300',
     description: 'Priya specializes in deep cleaning and home organization. She can transform cluttered spaces into neat, functional areas. Currently awaiting verification.'
   }
 ];
