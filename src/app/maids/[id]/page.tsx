@@ -45,7 +45,7 @@ export default function MaidDetailPage({ params }: { params: { id: string } }) {
                 )}
                  <div className="flex items-center gap-1">
                   <HandCoins className="w-5 h-5" />
-                  <span className="font-semibold">{formatCurrency(maid.hourly_rate)}/hr</span>
+                  <span className="font-semibold">{formatCurrency(maid.monthly_rate)}/month</span>
                 </div>
               </div>
               <p className="mt-4 text-muted-foreground">{maid.description}</p>
@@ -72,6 +72,7 @@ export default function MaidDetailPage({ params }: { params: { id: string } }) {
           <Card className="sticky top-24">
             <CardHeader>
               <CardTitle>Book {maid.name}</CardTitle>
+              <p className="text-sm text-muted-foreground pt-1">Get a monthly estimate for your home.</p>
             </CardHeader>
             <CardContent>
               <BookingForm maid={maid} />

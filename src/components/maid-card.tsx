@@ -39,17 +39,20 @@ export function MaidCard({ maid }: MaidCardProps) {
           </div>
         )}
         <div className="mt-2 flex flex-wrap gap-2">
-          {maid.services.map((service) => (
+          {maid.services.slice(0, 3).map((service) => (
             <Badge key={service} variant="secondary" className="capitalize">
               {service}
             </Badge>
           ))}
+          {maid.services.length > 3 && (
+            <Badge variant="secondary">+{maid.services.length - 3} more</Badge>
+          )}
         </div>
       </CardContent>
       <CardFooter className="p-4 pt-0 flex justify-between items-center">
         <p className="font-semibold">
-          {formatCurrency(maid.hourly_rate)}
-          <span className="text-sm font-normal text-muted-foreground">/hr</span>
+          {formatCurrency(maid.monthly_rate)}
+          <span className="text-sm font-normal text-muted-foreground">/mo</span>
         </p>
         <Link href={`/maids/${maid.id}?role=client`} passHref>
           <Button>Book Now</Button>

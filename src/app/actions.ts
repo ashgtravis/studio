@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { suggestBookingSummary, type SuggestBookingSummaryInput } from "@/ai/flows/suggest-booking-summary";
+import { estimateMonthlyPrice, type EstimateMonthlyPriceInput } from "@/ai/flows/estimate-monthly-price";
 import { createBooking } from "@/lib/data";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
@@ -9,52 +9,63 @@ import { revalidatePath } from "next/cache";
 const FormSchema = z.object({
   maidId: z.string(),
   maidName: z.string(),
-  date: z.string().min(1, "Date is required."),
-  timeSlot: z.string().min(1, "Time slot is required."),
-  services: z.string(),
-  hourlyRate: z.string().transform(Number),
+  maidBaseRate: z.string().transform(Number),
+  homeBhk: z.string().min(1, "Home size (BHK) is required."),
+  homeSqFt: z.string().min(1, "Home area (sq ft) is required."),
+  services: z.string().min(1, "Please select at least one service."),
 });
 
-type BookingSummaryState = {
-  summary: string | null;
+type PriceEstimateState = {
+  estimatedPrice: number | null;
+  priceBreakdown: string | null;
   error: string | null;
+  formData: any | null;
 };
 
-export async function getBookingSummary(
-  prevState: BookingSummaryState,
+export async function getPriceEstimate(
+  prevState: PriceEstimateState,
   formData: FormData
-): Promise<BookingSummaryState> {
+): Promise<PriceEstimateState> {
   try {
     const validatedFields = FormSchema.safeParse(Object.fromEntries(formData.entries()));
 
     if (!validatedFields.success) {
-      return {
-        summary: null,
-        error: "Invalid data. Please check your selections.",
-      };
+        const errorMessages = validatedFields.error.errors.map(e => e.message).join(', ');
+        return {
+            estimatedPrice: null,
+            priceBreakdown: null,
+            error: `Invalid data: ${errorMessages}`,
+            formData: null,
+        };
     }
 
-    const { maidName, date, timeSlot, services, hourlyRate } = validatedFields.data;
+    const { maidName, maidBaseRate, homeBhk, homeSqFt, services } = validatedFields.data;
 
-    const aiInput: SuggestBookingSummaryInput = {
+    const serviceList = services.split(',');
+
+    const aiInput: EstimateMonthlyPriceInput = {
       maidName,
-      date,
-      timeSlot,
-      services,
-      hourlyRate,
+      maidBaseRate,
+      homeBhk,
+      homeSqFt,
+      services: serviceList
     };
 
-    const result = await suggestBookingSummary(aiInput);
+    const result = await estimateMonthlyPrice(aiInput);
 
     return {
-      summary: result.summary,
+      estimatedPrice: result.estimatedPrice,
+      priceBreakdown: result.priceBreakdown,
       error: null,
+      formData: validatedFields.data,
     };
   } catch (error) {
-    console.error("Error generating booking summary:", error);
+    console.error("Error generating price estimate:", error);
     return {
-      summary: null,
-      error: "Failed to generate booking summary. Please try again.",
+      estimatedPrice: null,
+      priceBreakdown: null,
+      error: "Failed to generate price estimate. Please try again.",
+      formData: null,
     };
   }
 }

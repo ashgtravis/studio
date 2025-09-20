@@ -2,7 +2,7 @@ export type Maid = {
   id: string;
   name: string;
   services: string[];
-  hourly_rate: number;
+  monthly_rate: number;
   rating: number;
   verified: boolean;
   image_url: string;

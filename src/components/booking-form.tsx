@@ -1,16 +1,9 @@
 "use client";
 
-import { useState, useActionState } from "react";
-import { CalendarIcon, Loader2 } from "lucide-react";
-import { format } from "date-fns";
-import { cn } from "@/lib/utils";
+import { useState, useActionState, useEffect } from "react";
+import { Loader2, Info } from "lucide-react";
+import { cn, formatCurrency } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
@@ -18,101 +11,74 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
-import { getBookingSummary, confirmBooking } from "@/app/actions";
+import { getPriceEstimate, confirmBooking } from "@/app/actions";
 import type { Maid } from "@/lib/types";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
-const timeSlots = [
-  "09:00 AM - 12:00 PM",
-  "10:00 AM - 01:00 PM",
-  "02:00 PM - 05:00 PM",
-  "03:00 PM - 06:00 PM",
-];
+const bhkOptions = ["1 BHK", "2 BHK", "3 BHK", "4 BHK", "5+ BHK"];
 
 const initialState = {
-  summary: null,
+  estimatedPrice: null,
+  priceBreakdown: null,
   error: null,
+  formData: null,
 };
 
-function SubmitButton({ isPending }: { isPending: boolean }) {
-  return (
-    <Button type="submit" className="w-full" disabled={isPending}>
-      {isPending ? (
-        <>
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
-        </>
-      ) : (
-        "Proceed to Confirm"
-      )}
-    </Button>
-  );
-}
-
-function ConfirmButton({ isPending, bookingDetails }: { isPending: boolean, bookingDetails: any }) {
-  return (
-    <Button
-      className="w-full"
-      disabled={isPending}
-      onClick={async () => {
-        await confirmBooking(bookingDetails);
-      }}
-    >
-      {isPending ? (
-        <>
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Confirming...
-        </>
-      ) : (
-        "Confirm Booking"
-      )}
-    </Button>
-  );
-}
-
 export default function BookingForm({ maid }: { maid: Maid }) {
-  const [date, setDate] = useState<Date | undefined>();
-  const [timeSlot, setTimeSlot] = useState<string>("");
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [isConfirming, setIsConfirming] = useState(false);
-  const [state, formAction] = useActionState(getBookingSummary, initialState);
+  const [state, formAction, isPending] = useActionState(getPriceEstimate, initialState);
   const { toast } = useToast();
 
-  const handleFormAction = async (formData: FormData) => {
-    if (!date || !timeSlot) {
-      toast({
-        variant: "destructive",
-        title: "Missing Information",
-        description: "Please select a date and time slot.",
-      });
-      return;
-    }
-    const result = await getBookingSummary(initialState, formData);
-    if (result.error) {
+  useEffect(() => {
+    if (state.error) {
       toast({
         variant: "destructive",
         title: "Error",
-        description: result.error,
+        description: state.error,
       });
-    } else if (result.summary) {
+    } else if (state.estimatedPrice) {
       setShowConfirmation(true);
     }
-  };
-  
-  const bookingDetails = {
-    maidId: maid.id,
-    maidName: maid.name,
-    date: date ? format(date, "yyyy-MM-dd") : "",
-    timeSlot,
-    services: maid.services.join(", "),
-    hourlyRate: maid.hourly_rate,
+  }, [state, toast]);
+
+  const handleServiceChange = (service: string, checked: boolean | string) => {
+    if (checked) {
+      setSelectedServices((prev) => [...prev, service]);
+    } else {
+      setSelectedServices((prev) => prev.filter((s) => s !== service));
+    }
   };
 
   const handleConfirm = async () => {
     setIsConfirming(true);
+    
+    // For simplicity, we'll create a booking for the upcoming month
+    const bookingDate = new Date();
+    bookingDate.setMonth(bookingDate.getMonth() + 1);
+    bookingDate.setDate(1);
+
+    const bookingDetails = {
+      maidId: maid.id,
+      date: bookingDate.toISOString().split('T')[0],
+      timeSlot: 'Monthly Subscription', // Placeholder for monthly service
+    };
+
     const result = await confirmBooking(bookingDetails);
     setIsConfirming(false);
-    
+
     if (result && result.success === false) {
       toast({
         variant: "destructive",
@@ -120,30 +86,38 @@ export default function BookingForm({ maid }: { maid: Maid }) {
         description: result.error || "Something went wrong. Please try again.",
       });
     } else {
-        toast({
-          title: "Booking Confirmed!",
-          description: "Your booking has been successfully submitted.",
-        });
-        // a redirect will happen in server action
+      toast({
+        title: "Booking Confirmed!",
+        description: `Your monthly service with ${maid.name} has been requested.`,
+      });
     }
   };
-
-  if (showConfirmation && state.summary) {
+  
+  if (showConfirmation && state.estimatedPrice && state.priceBreakdown) {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Confirm Your Booking</CardTitle>
+          <CardTitle>Confirm Your Plan</CardTitle>
         </CardHeader>
         <CardContent>
-          <Alert>
-            <AlertTitle>Booking Summary</AlertTitle>
-            <AlertDescription className="whitespace-pre-wrap">
-              {state.summary}
-            </AlertDescription>
-          </Alert>
-          <p className="text-sm text-muted-foreground mt-2">
-            AI-generated summary. Please review carefully.
-          </p>
+          <div className="space-y-4">
+            <div className="text-center">
+                <p className="text-sm text-muted-foreground">Estimated Monthly Price</p>
+                <p className="text-4xl font-bold">{formatCurrency(state.estimatedPrice)}</p>
+            </div>
+            <Alert>
+                <Info className="h-4 w-4" />
+                <AlertTitle className="flex items-center gap-2">
+                    Price Breakdown
+                </AlertTitle>
+                <AlertDescription className="text-xs">
+                    {state.priceBreakdown}
+                </AlertDescription>
+            </Alert>
+             <p className="text-xs text-muted-foreground mt-2">
+                AI-generated estimate. Final price may vary. This is a recurring monthly subscription.
+            </p>
+          </div>
         </CardContent>
         <CardFooter className="flex flex-col gap-2">
            <Button className="w-full" disabled={isConfirming} onClick={handleConfirm}>
@@ -152,7 +126,7 @@ export default function BookingForm({ maid }: { maid: Maid }) {
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Confirming...
               </>
             ) : (
-              "Confirm Booking"
+              "Confirm Monthly Booking"
             )}
           </Button>
           <Button
@@ -160,8 +134,6 @@ export default function BookingForm({ maid }: { maid: Maid }) {
             className="w-full"
             onClick={() => {
                 setShowConfirmation(false);
-                state.summary = null;
-                state.error = null;
             }}
             disabled={isConfirming}
           >
@@ -173,61 +145,59 @@ export default function BookingForm({ maid }: { maid: Maid }) {
   }
 
   return (
-    <form action={handleFormAction} className="space-y-4">
+    <form action={formAction} className="space-y-4">
       <input type="hidden" name="maidId" value={maid.id} />
       <input type="hidden" name="maidName" value={maid.name} />
-      <input type="hidden" name="services" value={maid.services.join(", ")} />
-      <input type="hidden" name="hourlyRate" value={maid.hourly_rate} />
+      <input type="hidden" name="maidBaseRate" value={maid.monthly_rate} />
+      <input type="hidden" name="services" value={selectedServices.join(",")} />
 
-      <div>
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button
-              variant={"outline"}
-              className={cn(
-                "w-full justify-start text-left font-normal",
-                !date && "text-muted-foreground"
-              )}
-            >
-              <CalendarIcon className="mr-2 h-4 w-4" />
-              {date ? format(date, "PPP") : <span>Pick a date</span>}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0">
-            <Calendar
-              mode="single"
-              selected={date}
-              onSelect={setDate}
-              initialFocus
-              disabled={(d) => d < new Date() || d < new Date("1900-01-01")}
-            />
-          </PopoverContent>
-        </Popover>
-        <input type="hidden" name="date" value={date ? format(date, "yyyy-MM-dd") : ""} />
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <Label htmlFor="home-bhk">BHK</Label>
+           <Select name="homeBhk">
+            <SelectTrigger id="home-bhk">
+                <SelectValue placeholder="Select BHK" />
+            </SelectTrigger>
+            <SelectContent>
+                {bhkOptions.map((bhk) => (
+                <SelectItem key={bhk} value={bhk}>
+                    {bhk}
+                </SelectItem>
+                ))}
+            </SelectContent>
+            </Select>
+        </div>
+        <div>
+          <Label htmlFor="home-sqft">Area (sq ft)</Label>
+          <Input id="home-sqft" name="homeSqFt" placeholder="e.g., 1200" type="number" />
+        </div>
       </div>
 
       <div>
-        <Select name="timeSlot" onValueChange={setTimeSlot} value={timeSlot}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select a time slot" />
-          </SelectTrigger>
-          <SelectContent>
-            {timeSlots.map((slot) => (
-              <SelectItem key={slot} value={slot}>
-                {slot}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <Label>Services</Label>
+        <div className="space-y-2 mt-2 rounded-md border p-4">
+          {maid.services.map((service) => (
+            <div key={service} className="flex items-center space-x-2">
+              <Checkbox
+                id={`service-${service}`}
+                onCheckedChange={(checked) => handleServiceChange(service, checked)}
+              />
+              <Label htmlFor={`service-${service}`} className="capitalize font-normal">
+                {service}
+              </Label>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <Button type="submit" className="w-full" disabled={!date || !timeSlot}>
-        Proceed to Book
+      <Button type="submit" className="w-full" disabled={isPending || selectedServices.length === 0}>
+        {isPending ? (
+            <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Calculating...
+            </>
+        ) : "Get Price Estimate"}
       </Button>
 
-      {state?.error && (
-        <p className="text-sm text-destructive">{state.error}</p>
-      )}
     </form>
   );
 }
