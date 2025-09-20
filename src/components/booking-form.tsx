@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { useFormState } from "react-dom";
+import { useState, useActionState } from "react";
 import { CalendarIcon, Loader2 } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
@@ -76,7 +75,7 @@ export default function BookingForm({ maid }: { maid: Maid }) {
   const [timeSlot, setTimeSlot] = useState<string>("");
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [isConfirming, setIsConfirming] = useState(false);
-  const [state, formAction] = useFormState(getBookingSummary, initialState);
+  const [state, formAction] = useActionState(getBookingSummary, initialState);
   const { toast } = useToast();
 
   const handleFormAction = async (formData: FormData) => {
@@ -114,18 +113,18 @@ export default function BookingForm({ maid }: { maid: Maid }) {
     const result = await confirmBooking(bookingDetails);
     setIsConfirming(false);
     
-    if (result.success) {
-      toast({
-        title: "Booking Confirmed!",
-        description: "Your booking has been successfully submitted.",
-      });
-      // a redirect will happen in server action
-    } else {
+    if (result && result.success === false) {
       toast({
         variant: "destructive",
         title: "Booking Failed",
         description: result.error || "Something went wrong. Please try again.",
       });
+    } else {
+        toast({
+          title: "Booking Confirmed!",
+          description: "Your booking has been successfully submitted.",
+        });
+        // a redirect will happen in server action
     }
   };
 
