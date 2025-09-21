@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Sparkles, LogIn, UserPlus } from 'lucide-react';
+import { Menu, Sparkles, LogIn, UserPlus, Info, HelpCircle } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
@@ -78,16 +78,24 @@ export function AppHeader() {
       return <AuthLinks />
   }
 
+  const CommonLinks = () => (
+    <>
+        <NavLink href="/about">About Us</NavLink>
+        <NavLink href="/faq">FAQ</NavLink>
+    </>
+  )
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center">
         <div className="mr-4 flex items-center">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
+          <Link href={role ? `/?role=${role}`: '/'} className="mr-6 flex items-center space-x-2">
             <Sparkles className="h-6 w-6 text-primary" />
             <span className="font-bold">MaidLink</span>
           </Link>
           <nav className="hidden gap-6 md:flex">
             {renderLinks()}
+            <CommonLinks />
           </nav>
         </div>
         <div className="flex flex-1 items-center justify-end space-x-2">
@@ -104,6 +112,7 @@ export function AppHeader() {
             <SheetContent side="right" className="w-[300px] sm:w-[400px]">
               <nav className="flex flex-col gap-4 mt-8">
                 {renderLinks()}
+                <CommonLinks />
                 <div className="mt-4 pt-4 border-t">
                   {renderAuth()}
                 </div>

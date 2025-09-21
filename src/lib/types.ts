@@ -4,6 +4,8 @@ export type Maid = {
   services: string[];
   monthly_rate: number;
   rating: number;
+  avg_rating: number;
+  reliability_score: number;
   verified: boolean;
   image_url: string;
   description: string;
@@ -29,3 +31,23 @@ export type Notification = {
   read: boolean;
   created_at: string;
 };
+
+export type Review = {
+  id: string;
+  booking_id: string;
+  client_id: string;
+  maid_id: string;
+  rating: number;
+  comment: string;
+  created_at: string;
+};
+
+export type Attendance = {
+    id: string;
+    booking_id: string;
+    maid_id: string;
+    client_id: string;
+    date: string;
+    status: 'present' | 'absent';
+    created_at: string;
+}

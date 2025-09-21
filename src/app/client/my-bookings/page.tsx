@@ -15,9 +15,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import Image from "next/image";
+import Link from "next/link";
+import { CalendarCheck } from "lucide-react";
 
 export default function MyBookingsPage() {
   // In a real app, the user phone would come from the session.
@@ -55,8 +58,9 @@ export default function MyBookingsPage() {
                 <TableRow>
                   <TableHead>Maid</TableHead>
                   <TableHead>Date</TableHead>
-                  <TableHead>Time Slot</TableHead>
+                  <TableHead>Type</TableHead>
                   <TableHead>Status</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -85,11 +89,21 @@ export default function MyBookingsPage() {
                           {booking.status}
                         </Badge>
                       </TableCell>
+                      <TableCell className="text-right">
+                        {(booking.status === 'accepted' || booking.status === 'completed') && (
+                          <Button asChild variant="outline" size="sm">
+                             <Link href={`/client/attendance/${booking.id}?role=client`}>
+                              <CalendarCheck className="mr-2 h-4 w-4" />
+                              Attendance
+                            </Link>
+                          </Button>
+                        )}
+                      </TableCell>
                     </TableRow>
                   ))
                 ) : (
                   <TableRow>
-                    <TableCell colSpan={4} className="text-center h-24">
+                    <TableCell colSpan={5} className="text-center h-24">
                       You have no bookings yet.
                     </TableCell>
                   </TableRow>
