@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useActionState, useEffect } from "react";
-import { Loader2, Info } from "lucide-react";
+import { Loader2, Info, IndianRupee } from "lucide-react";
 import { cn, formatCurrency } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,12 +19,6 @@ import { getPriceEstimate, confirmBooking } from "@/app/actions";
 import type { Maid } from "@/lib/types";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 const bhkOptions = ["1 BHK", "2 BHK", "3 BHK", "4 BHK", "5+ BHK"];
 
@@ -103,7 +97,10 @@ export default function BookingForm({ maid }: { maid: Maid }) {
           <div className="space-y-4">
             <div className="text-center">
                 <p className="text-sm text-muted-foreground">Estimated Monthly Price</p>
-                <p className="text-4xl font-bold">{formatCurrency(state.estimatedPrice)}</p>
+                <p className="text-4xl font-bold flex items-center justify-center">
+                  <IndianRupee className="h-8 w-8 mr-1"/>
+                  {formatCurrency(state.estimatedPrice, false)}
+                </p>
             </div>
             <Alert>
                 <Info className="h-4 w-4" />
@@ -154,7 +151,7 @@ export default function BookingForm({ maid }: { maid: Maid }) {
       <div className="grid grid-cols-2 gap-4">
         <div>
           <Label htmlFor="home-bhk">BHK</Label>
-           <Select name="homeBhk">
+           <Select name="homeBhk" required>
             <SelectTrigger id="home-bhk">
                 <SelectValue placeholder="Select BHK" />
             </SelectTrigger>
@@ -169,7 +166,7 @@ export default function BookingForm({ maid }: { maid: Maid }) {
         </div>
         <div>
           <Label htmlFor="home-sqft">Area (sq ft)</Label>
-          <Input id="home-sqft" name="homeSqFt" placeholder="e.g., 1200" type="number" />
+          <Input id="home-sqft" name="homeSqFt" placeholder="e.g., 1200" type="number" required />
         </div>
       </div>
 
@@ -188,6 +185,9 @@ export default function BookingForm({ maid }: { maid: Maid }) {
             </div>
           ))}
         </div>
+        {state?.error?.includes("at least one service") && (
+          <p className="text-sm font-medium text-destructive mt-1">Please select at least one service.</p>
+        )}
       </div>
 
       <Button type="submit" className="w-full" disabled={isPending || selectedServices.length === 0}>

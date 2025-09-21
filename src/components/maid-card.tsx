@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Star, ShieldCheck } from "lucide-react";
+import { Star, ShieldCheck, IndianRupee } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -58,8 +58,9 @@ export function MaidCard({ maid }: MaidCardProps) {
         </div>
       </CardContent>
       <CardFooter className="p-4 pt-0 flex justify-between items-center">
-        <p className="font-semibold">
-          {formatCurrency(maid.monthly_rate)}
+        <p className="font-semibold flex items-center">
+          <IndianRupee className="h-4 w-4 mr-1"/>
+          {formatCurrency(maid.monthly_rate, false)}
           <span className="text-sm font-normal text-muted-foreground">/mo</span>
         </p>
         <Link href={`/maids/${maid.id}?role=client`} passHref>

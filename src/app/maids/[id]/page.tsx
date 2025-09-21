@@ -1,7 +1,7 @@
 import { getMaidById } from "@/lib/data";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Star, ShieldCheck, HandCoins } from "lucide-react";
+import { Star, ShieldCheck, HandCoins, IndianRupee } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -53,8 +53,8 @@ export default function MaidDetailPage({ params }: { params: { id: string } }) {
                   </div>
                 )}
                  <div className="flex items-center gap-1">
-                  <HandCoins className="w-5 h-5" />
-                  <span className="font-semibold">{formatCurrency(maid.monthly_rate)}/month</span>
+                  <IndianRupee className="w-5 h-5" />
+                  <span className="font-semibold">{formatCurrency(maid.monthly_rate, false)}/month</span>
                 </div>
               </div>
               <p className="mt-4 text-muted-foreground">{maid.description}</p>
