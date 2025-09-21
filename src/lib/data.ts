@@ -11,8 +11,7 @@ let maids: Maid[] = [
     avg_rating: 4.8,
     reliability_score: 92,
     verified: true,
-    // TODO: Replace this placeholder URL with your own image link
-    image_url: 'https://picsum.photos/seed/woman-cooking/300/300',
+    image_url: 'https://media.istockphoto.com/id/1457611456/photo/portrait-of-a-young-woman-cooking-food-in-the-kitchen-stock-photo.jpg?s=612x612&w=0&k=20&c=mh5Go3PuHOTyoPav-_EW4Pg6yCYMuhmIdhN498ygihQ=',
     description: 'A fantastic cook, Reshmi specializes in preparing delicious and healthy home-style meals. She is an expert in various cuisines and maintains a spotless kitchen.'
   },
   {
@@ -24,8 +23,7 @@ let maids: Maid[] = [
     avg_rating: 4.6,
     reliability_score: 88,
     verified: true,
-    // TODO: Replace this placeholder URL with your own image link
-    image_url: 'https://picsum.photos/seed/woman-cleaning/300/300',
+    image_url: 'https://nettv4u.com/fileman/Uploads/deepika_padhukone_cooking.jpg',
     description: 'Maria is a deep cleaning specialist who prides herself on leaving every corner of your home, especially bathrooms, sparkling clean. She is efficient and reliable.'
   },
   {
@@ -37,8 +35,7 @@ let maids: Maid[] = [
     avg_rating: 4.5,
     reliability_score: 75,
     verified: true,
-    // TODO: Replace this placeholder URL with your own image link
-    image_url: 'https://picsum.photos/seed/woman-sweeping/300/300',
+    image_url: 'https://media.istockphoto.com/id/1997053753/photo/close-up-shot-of-woman-hands-washing-dishes-or-utensils-at-kitchen-using-liquid-soap-concept.jpg?s=612x612&w=0&k=20&c=ZNfCl1IuCXUngWj35Dzlbiuij8aBMBihkeg-f4KQP7A=',
     description: 'Shruti is diligent and efficient, ensuring your floors are always pristine. She handles daily sweeping, mopping, and other general cleaning tasks with great care.'
   },
   {
@@ -50,8 +47,7 @@ let maids: Maid[] = [
     avg_rating: 4.6,
     reliability_score: 95,
     verified: true,
-    // TODO: Replace this placeholder URL with your own image link
-    image_url: 'https://picsum.photos/seed/indian-woman-4/300/300',
+    image_url: 'https://media.istockphoto.com/id/1330700113/photo/indian-housewife-in-kitchen.jpg?s=612x612&w=0&k=20&c=Kf2P6u1lirMNv5DuGZKdAjZJ518y2UgPSg0I6x3ervU=',
     description: 'Gita is hardworking and meticulous. She excels at general house cleaning and laundry services, ensuring your clothes are fresh and your home is tidy.'
   },
   {
