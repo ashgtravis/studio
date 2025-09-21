@@ -36,7 +36,7 @@ export default function Home() {
                 </div>
               </div>
               <Image
-                src="https://picsum.photos/seed/clean-home/600/600"
+                src="https://picsum.photos/seed/clean-living-room/600/600"
                 alt="Hero"
                 width={600}
                 height={600}
