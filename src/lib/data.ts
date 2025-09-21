@@ -11,6 +11,7 @@ let maids: Maid[] = [
     avg_rating: 4.8,
     reliability_score: 92,
     verified: true,
+    // TODO: Replace this placeholder URL with your own image link
     image_url: 'https://picsum.photos/seed/woman-cooking/300/300',
     description: 'A fantastic cook, Reshmi specializes in preparing delicious and healthy home-style meals. She is an expert in various cuisines and maintains a spotless kitchen.'
   },
@@ -23,6 +24,7 @@ let maids: Maid[] = [
     avg_rating: 4.6,
     reliability_score: 88,
     verified: true,
+    // TODO: Replace this placeholder URL with your own image link
     image_url: 'https://picsum.photos/seed/woman-cleaning/300/300',
     description: 'Maria is a deep cleaning specialist who prides herself on leaving every corner of your home, especially bathrooms, sparkling clean. She is efficient and reliable.'
   },
@@ -35,6 +37,7 @@ let maids: Maid[] = [
     avg_rating: 4.5,
     reliability_score: 75,
     verified: true,
+    // TODO: Replace this placeholder URL with your own image link
     image_url: 'https://picsum.photos/seed/woman-sweeping/300/300',
     description: 'Shruti is diligent and efficient, ensuring your floors are always pristine. She handles daily sweeping, mopping, and other general cleaning tasks with great care.'
   },
@@ -47,6 +50,7 @@ let maids: Maid[] = [
     avg_rating: 4.6,
     reliability_score: 95,
     verified: true,
+    // TODO: Replace this placeholder URL with your own image link
     image_url: 'https://picsum.photos/seed/indian-woman-4/300/300',
     description: 'Gita is hardworking and meticulous. She excels at general house cleaning and laundry services, ensuring your clothes are fresh and your home is tidy.'
   },
@@ -59,6 +63,7 @@ let maids: Maid[] = [
     avg_rating: 4.9,
     reliability_score: 98,
     verified: true,
+    // TODO: Replace this placeholder URL with your own image link
     image_url: 'https://picsum.photos/seed/indian-woman-5/300/300',
     description: 'Meena is a compassionate caregiver with experience in assisting the elderly. She combines this with her cooking skills to provide holistic support.'
   },
@@ -71,6 +76,7 @@ let maids: Maid[] = [
     avg_rating: 4.7,
     reliability_score: 68,
     verified: false,
+    // TODO: Replace this placeholder URL with your own image link
     image_url: 'https://picsum.photos/seed/indian-woman-6/300/300',
     description: 'Priya specializes in deep cleaning and home organization. She can transform cluttered spaces into neat, functional areas. Currently awaiting verification.'
   }
