@@ -59,7 +59,6 @@ let maids: Maid[] = [
     avg_rating: 4.9,
     reliability_score: 98,
     verified: true,
-    // TODO: Replace this placeholder URL with your own image link
     image_url: 'https://picsum.photos/seed/indian-woman-5/300/300',
     description: 'Meena is a compassionate caregiver with experience in assisting the elderly. She combines this with her cooking skills to provide holistic support.'
   },
@@ -72,7 +71,6 @@ let maids: Maid[] = [
     avg_rating: 4.7,
     reliability_score: 68,
     verified: false,
-    // TODO: Replace this placeholder URL with your own image link
     image_url: 'https://picsum.photos/seed/indian-woman-6/300/300',
     description: 'Priya specializes in deep cleaning and home organization. She can transform cluttered spaces into neat, functional areas. Currently awaiting verification.'
   }
