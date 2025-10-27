@@ -1,9 +1,8 @@
 import {genkit} from 'genkit';
 import {googleAI} from '@genkit-ai/googleai';
-import {config} from 'dotenv';
 
-// Load environment variables from .env.local
-config({ path: '.env.local' });
+// The API key is automatically read from the Vercel environment variables.
+// No need for dotenv configuration here.
 
 export const ai = genkit({
   plugins: [googleAI()],
