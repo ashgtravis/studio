@@ -2,11 +2,15 @@ import {genkit} from 'genkit';
 import {googleAI} from '@genkit-ai/googleai';
 import { TEMP_API_KEY } from './temp-key';
 
-// Explicitly pass the API key from Vercel's environment variables
-// to ensure it's picked up by the Genkit plugin.
 const apiKey = TEMP_API_KEY;
 
+if (!apiKey) {
+  throw new Error("Missing GEMINI_API_KEY");
+}
+
+// Create a named model instance that we can reference later
+export const geminiPro = googleAI({apiKey});
+
 export const ai = genkit({
-  plugins: [googleAI({apiKey})],
-  model: 'googleai/gemini-2.5-flash',
+  plugins: [geminiPro],
 });

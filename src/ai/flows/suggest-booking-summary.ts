@@ -9,7 +9,7 @@
  * @function suggestBookingSummary - A function that calls the suggestBookingSummaryFlow to generate the summary.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, geminiPro} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const SuggestBookingSummaryInputSchema = z.object({
@@ -36,6 +36,7 @@ const prompt = ai.definePrompt({
   name: 'suggestBookingSummaryPrompt',
   input: {schema: SuggestBookingSummaryInputSchema},
   output: {schema: SuggestBookingSummaryOutputSchema},
+  model: geminiPro('gemini-2.5-flash'),
   prompt: `Summarize the following booking details for the client to confirm:\n\nMaid Name: {{{maidName}}}\nDate: {{{date}}}\nTime Slot: {{{timeSlot}}}\nServices: {{{services}}}\nHourly Rate: {{{hourlyRate}}}\n\nSummary:`,
 });
 
