@@ -9,7 +9,7 @@
  * @function estimateMonthlyPrice - A function that calls the estimateMonthlyPriceFlow to generate the estimate.
  */
 
-import {ai, geminiPro} from '@/ai/genkit';
+import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const EstimateMonthlyPriceInputSchema = z.object({
@@ -37,7 +37,6 @@ const prompt = ai.definePrompt({
   name: 'estimateMonthlyPricePrompt',
   input: {schema: EstimateMonthlyPriceInputSchema},
   output: {schema: EstimateMonthlyPriceOutputSchema},
-  model: geminiPro('gemini-2.5-flash'),
   prompt: `You are an AI assistant for a maid booking service. Your task is to calculate an estimated monthly price for a client's request in Indian Rupees (₹).
 
 You need to act like a fair calculator. The final price should be influenced by the maid's base rate, the size of the home, and the number/type of services requested.
